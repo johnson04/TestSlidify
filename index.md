@@ -1,57 +1,69 @@
 ---
-title       : My First Slidify Presentation
-subtitle    : -- Developing Data Product
-
+title       : Iris Classification (with Decision Trees)
+subtitle    : -- Developing Data Product course Projects
+author      : Chuan Zhang, 2014
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-url:
-    lib: ./libraries
-    assets: ./assets
+
 widgets     : [mathjax]     # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
+mode        : standalone    # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## On this slide we plot some Gaussian random numbers
+## About IrisCDTree
 
+<font size=6> IrisCDTree (https://chuan.shinyapps.io/IrisCDTree) is an expository shiny app, and it demonstrates classification of the three types of the flower iris using the decision tree method. </font>
 
-```r
-x <- rnorm(100,0,1)
-plot(x)
-```
+<img src="./IrisCDTree.png" height="70%" width="90%"></img>
 
-![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1.png) 
 
 --- 
 
-## On this slide we plot some binomial random numbers
+
+## Iris Data Set
+
+<font size=6> IrisCDTree trains a decision tree model with the famous (Fisher's or Anderson's) iris data set. Below is the first few observations from this data set.</font>
 
 
 ```r
-x <- rbinom(100,3,0.6)
-plot(x)
+data(iris)
+head(iris)
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+```
+
+
+---
+
+
+## Decision Tree Model
+
+<font size=6> As the webpage is being loaded, IrisCDTree trains the model with all the 150 observations of the data set. Below is the trained tree model.</font>
+
+
+```r
+library(rattle); library(rpart)
+modFit <- rpart(Species ~ ., data=iris); fancyRpartPlot(modFit)
 ```
 
 ![plot of chunk unnamed-chunk-2](assets/fig/unnamed-chunk-2.png) 
 
----
-
-## On this slide we plot some Poisson random numbers
-
-
-```r
-x <- rpois(100,4)
-plot(x)
-```
-
-![plot of chunk unnamed-chunk-3](assets/fig/unnamed-chunk-3.png) 
 
 ---
+
 
 ## On this slide we finish this presentation
 
 
-<font size=12>Thank you very much for your time and patience!</font>
+<font size=6> After the webpage is loaded, you can use the slider bars on the left hand side to input the four parameters of an iris flower you may have. Based on the trained decision tree model, the app will tell you which type your iris flower is, and you may compare yours with a sample picture. </font>
 
-
+<img src="./IrisCDTree1.png" height="60%" width="80%"></img>
